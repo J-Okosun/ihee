@@ -2,8 +2,11 @@ name: Build and Push Docker Image
 
 on:
   push:
-    paths:
-      - 'images/**' 
+  
+    branches:
+      - main
+  
+  
 
 env:
   ACR_NAME: byefrost
@@ -28,6 +31,8 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+        working-directory: ./images
 
       - name: Push Docker image to ACR
         run: docker push ${{ env.ACR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        working-directory: ./images
