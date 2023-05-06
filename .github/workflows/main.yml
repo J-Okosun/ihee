@@ -23,6 +23,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Login to ACR
+        working-directory: ./images
         uses: azure/docker-login@v1
         with:
           login-server: ${{ env.ACR_REGISTRY }}
